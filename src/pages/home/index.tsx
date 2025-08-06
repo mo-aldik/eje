@@ -48,8 +48,13 @@ const iconMap: IconMap = {
 const HomePage = () => {
   const { getPageParams, setPageParams } = usePageParams();
   const params = getPageParams();
-  const { isLoading: isLoadingEjeConstants, data: getEjeConstants } = useGetEjeConstantsApi();
-  const { data: details, isLoading } = useGetEjeDetailsApi({ enabled: !!params.from && !!params.to });
+  const { isLoading: isLoadingEjeConstants, data: getEjeConstants } = useGetEjeConstantsApi({
+    refetchInterval: 180000,
+  });
+  const { data: details, isLoading } = useGetEjeDetailsApi({
+    enabled: !!params.from && !!params.to,
+    refetchInterval: 180000,
+  });
   const { data: ejeData } = getEjeConstants ?? {};
 
   const currentDateText = useMemo(() => {
@@ -63,7 +68,7 @@ const HomePage = () => {
 
   useEffect(() => {
     setPageParams({
-      from: new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().split('T')[0],
+      from: new Date(new Date().setDate(new Date().getDate() - 7)).toISOString().split('T')[0],
       to: new Date().toISOString().split('T')[0],
       ...params,
     });

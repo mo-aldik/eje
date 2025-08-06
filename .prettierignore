@@ -1,0 +1,10 @@
+.husky
+.env
+.prettierignore
+.eslintignore
+dist
+build
+node_modules
+Dockerfile
+yarn.lock
+package-lock.json

@@ -1,0 +1,51 @@
+name: Deploy Github Actions - PROD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  VITE_REACT_APP_ENV_VAR: 'production'
+  VITE_REACT_APP_BASE_URL: 'https://epiapi.emiratesparkings.com'
+  VITE_REACT_APP_BASE_URL_2: 'https://epiapi.emiratesparkings.com'
+  VITE_GOOGLE_MAPS_API_KEY: 'AIzaSyBUtZjrs_fplvEWPYljDM2e_yDwEWMpaTM'
+  VITE_UAEPASS_URL_EN: 'https://id.uaepass.ae/idshub/authorize?response_type=code&client_id=emirates_parking_web_stage&scope=urn:uae:digitalid:profile:general&state=sww&redirect_uri=https://auth.emiratesparkingservices.com/&acr_values=urn:safelayer:tws:policies:authentication:level:low&failureURL=https://auth.emiratesparkingservices.com/&ui_locales=en'
+  VITE_UAEPASS_URL_AR: 'https://id.uaepass.ae/idshub/authorize?response_type=code&client_id=emirates_parking_web_stage&scope=urn:uae:digitalid:profile:general&state=sww&redirect_uri=https://auth.emiratesparkingservices.com/&acr_values=urn:safelayer:tws:policies:authentication:level:low&failureURL=https://auth.emiratesparkingservices.com/&ui_locales=ar'
+  VITE_UAEPASS_LOGOUT_URL: 'https://id.uaepass.ae/idshub/logout?redirect_uri=https://auth.emiratesparkingservices.com'
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ github.ref }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.ref }}-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: false

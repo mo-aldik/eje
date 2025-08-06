@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "formulahendry.auto-rename-tag",
+    "streetsidesoftware.code-spell-checker",
+    "hediet.vscode-drawio",
+    "christian-kohler.path-intellisense",
+    "wix.vscode-import-cost",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "github.vscode-github-actions"
+  ]
+}

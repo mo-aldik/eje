@@ -1,0 +1,71 @@
+{
+  "name": "eje-panel",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "format": "prettier --write .",
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx . --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint --fix --ext .ts,.tsx,.js,.jsx .",
+    "lint:types": "tsc --pretty --noEmit --project tsconfig.json",
+    "lint:all": "npm run lint:fix && npm run lint:types && npm run lint"
+  },
+  "engines": {
+    "npm": "11.5.2",
+    "node": "22.x"
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^3.23.0",
+    "@emotion/react": "^11.14.0",
+    "@react-google-maps/api": "^2.20.7",
+    "@tanstack/react-query": "^5.84.1",
+    "axios": "^1.11.0",
+    "dayjs": "^1.11.13",
+    "next-themes": "^0.4.6",
+    "prettier-plugin-organize-imports": "^4.2.0",
+    "query-string": "^9.2.2",
+    "react": "^19.1.0",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.7.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.30.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "commitizen": "^4.3.1",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.2",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.35.1",
+    "vite": "^7.0.4",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
